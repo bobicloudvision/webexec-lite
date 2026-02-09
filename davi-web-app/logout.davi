@@ -1,6 +1,6 @@
 <davi>
-session_start();
-session_destroy();
+session.start();
+session.destroy();
 header('Location: index.davi');
 exit;
-</davi> 
+</davi>

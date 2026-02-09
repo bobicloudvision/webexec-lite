@@ -1,24 +1,35 @@
 <h1>Login</h1>
 <davi>
-session_start();
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = trim($_POST['password'] ?? '');
-    $usersFile = __DIR__ . '/../users.txt';
-    $users = file_exists($usersFile) ? file($usersFile, FILE_IGNORE_NEW_LINES) : [];
-    $found = false;
-    foreach ($users as $user) {
-        list($u, $p) = explode(':', $user, 2);
-        if ($u === $username && password_verify($password, $p)) {
-            $_SESSION['user'] = $username;
-            $found = true;
+session.start();
+if (request.server["REQUEST_METHOD"] === "POST") {
+    username = "";
+    if (isset(request.post["username"])) {
+        username = trim(request.post["username"]);
+    }
+    password = "";
+    if (isset(request.post["password"])) {
+        password = trim(request.post["password"]);
+    }
+    usersFile = env.dir . "/../users.txt";
+    users = [];
+    if (file.exists(usersFile)) {
+        users = file.readLines(usersFile);
+    }
+    found = false;
+    for (user in users) {
+        parts = explode(":", user, 2);
+        u = parts[0];
+        p = parts[1];
+        if (u === username and password_verify(password, p)) {
+            request.session["user"] = username;
+            found = true;
             break;
         }
     }
-    if ($found) {
-        echo '<p style="color:green">Login successful. <a href="index.davi">Go to home</a>.</p>';
+    if (found) {
+        echo('<p style="color:green">Login successful. <a href="index.davi">Go to home</a>.</p>');
     } else {
-        echo '<p style="color:red">Invalid username or password.</p>';
+        echo('<p style="color:red">Invalid username or password.</p>');
     }
 }
 </davi>

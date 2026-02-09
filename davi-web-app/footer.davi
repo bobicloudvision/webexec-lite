@@ -1,17 +1,15 @@
 <h1>
 
-    $_GET: <davi> var_dump($_GET); </davi>
-    $_POST: <davi> var_dump($_POST); </davi>
-    $_REQUEST: <davi> var_dump($_REQUEST); </davi>
-    $_SERVER: <davi> var_dump($_SERVER); </davi>
-    $_ENV: <davi> var_dump($_ENV); </davi>
-    $_COOKIE: <davi> var_dump($_COOKIE); </davi>
-    $_FILES: <davi> var_dump($_FILES); </davi>
+    request.get: <davi> var_dump(request.get); </davi>
+    request.post: <davi> var_dump(request.post); </davi>
+    request.server: <davi> var_dump(request.server); </davi>
+    request.cookie: <davi> var_dump(request.cookie); </davi>
+    request.files: <davi> var_dump(request.files); </davi>
     
     <davi>
-    session_start();
-    if (isset($_SESSION['user'])) {
-        echo '<p>Logged in as <b>' . htmlspecialchars($_SESSION['user']) . '</b> | <a href="logout.davi">Logout</a></p>';
+    session.start();
+    if (isset(request.session["user"])) {
+        echo '<p>Logged in as <b>' . htmlspecialchars(request.session["user"]) . '</b> | <a href="logout.davi">Logout</a></p>';
     } else {
         echo '<p><a href="login.davi">Login</a> | <a href="register.davi">Register</a></p>';
     }
